@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Open Sans", "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary-50: #ecfbf9;
+  --color-primary-100: #d0f5f0;
+  --color-primary-200: #a4ebe1;
+  --color-primary-300: #6fdccd;
+  --color-primary-400: #40e0d0;
+  --color-primary-500: #2bc4b4;
+  --color-primary-600: #1fa598;
+  --color-primary-700: #1c8479;
+  --color-primary-800: #1b6961;
+  --color-primary-900: #185651;
+
+  --color-indigo-500: #2f0ca0;
+  --color-indigo-600: #1b0072;
+  --color-indigo-700: #16005c;
+  --color-indigo-900: #0d0038;
+
+  --color-accent-300: #ffc75a;
+  --color-accent-400: #faad13;
+  --color-accent-500: #d99110;
+
+  --color-ink-50: #f7f7f7;
+  --color-ink-100: #ececec;
+  --color-ink-200: #d1d1d1;
+  --color-ink-300: #b3b3b3;
+  --color-ink-400: #939393;
+  --color-ink-500: #838383;
+  --color-ink-900: #010000;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4fdfb;
+
+  --shadow-elev-1: 0 1px 2px 0 rgb(1 0 0 / 0.04), 0 1px 3px 0 rgb(1 0 0 / 0.06);
+  --shadow-elev-2: 0 4px 6px -1px rgb(1 0 0 / 0.06), 0 2px 4px -2px rgb(1 0 0 / 0.06);
+  --shadow-elev-3: 0 12px 24px -6px rgb(27 0 114 / 0.12), 0 8px 16px -8px rgb(27 0 114 / 0.08);
+  --shadow-elev-4: 0 24px 48px -12px rgb(27 0 114 / 0.18), 0 12px 24px -12px rgb(27 0 114 / 0.1);
+
+  --radius-btn: 0.5rem;
+  --radius-card: 1rem;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink-900);
+    background: var(--color-surface);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-indigo-600);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--color-primary-400);
+    color: var(--color-indigo-900);
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container-page { padding-inline: 2rem; } }
+
+  .heading-accent::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 4px;
+    background: var(--color-primary-400);
+    border-radius: 999px;
+    margin-bottom: 0.75rem;
+  }
+}
