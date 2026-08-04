@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
+import { DemoCartSeed } from "@/components/common/demo-cart-seed";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${poppins.variable} ${openSans.variable}`}>
       <body className="min-h-screen bg-surface text-ink-900 antialiased">
+        <DemoCartSeed />
         {children}
       </body>
     </html>

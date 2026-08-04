@@ -66,43 +66,72 @@ export default async function InvoiceCustomizePage({
       </section>
 
       <section className="mt-6 rounded-2xl bg-primary-50 p-5 md:p-7">
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="text-indigo-600 font-bold">
-                <th className="text-left py-2 pr-4">Qty</th>
-                <th className="text-left py-2 pr-4">Name Product</th>
-                <th className="text-left py-2 pr-4">Duration</th>
-                <th className="text-left py-2 pr-4">Price</th>
-                <th className="text-left py-2 pr-4">Total</th>
-                <th className="w-12" />
+        <table className="hidden md:table min-w-full text-sm">
+          <thead>
+            <tr className="text-indigo-600 font-bold">
+              <th className="text-left py-2 pr-4">Qty</th>
+              <th className="text-left py-2 pr-4">Name Product</th>
+              <th className="text-left py-2 pr-4">Duration</th>
+              <th className="text-left py-2 pr-4">Price</th>
+              <th className="text-left py-2 pr-4">Total</th>
+              <th className="w-12" />
+            </tr>
+          </thead>
+          <tbody className="text-ink-900">
+            {invoice.lines.map((l) => (
+              <tr key={l.name}>
+                <td className="py-3 pr-4">{l.qty}</td>
+                <td className="py-3 pr-4 font-semibold">{l.name}</td>
+                <td className="py-3 pr-4">{l.duration}</td>
+                <td className="py-3 pr-4">{formatPrice(l.price)}</td>
+                <td className="py-3 pr-4">{formatPrice(l.qty * l.price)}</td>
+                <td className="py-3">
+                  <button
+                    aria-label="Edit line"
+                    className="h-9 w-9 grid place-items-center rounded-xl bg-primary-400 text-indigo-900"
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody className="text-ink-900">
-              {invoice.lines.map((l) => (
-                <tr key={l.name}>
-                  <td className="py-3 pr-4">{l.qty}</td>
-                  <td className="py-3 pr-4 font-semibold">{l.name}</td>
-                  <td className="py-3 pr-4">{l.duration}</td>
-                  <td className="py-3 pr-4">{formatPrice(l.price)}</td>
-                  <td className="py-3 pr-4">{formatPrice(l.qty * l.price)}</td>
-                  <td className="py-3">
-                    <button
-                      aria-label="Edit line"
-                      className="h-9 w-9 grid place-items-center rounded-xl bg-primary-400 text-indigo-900"
-                    >
-                      <Pencil className="h-4 w-4" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+
+        <ul className="md:hidden flex flex-col gap-3">
+          {invoice.lines.map((l) => (
+            <li
+              key={l.name}
+              className="rounded-xl bg-white p-4 shadow-[var(--shadow-elev-1)] flex flex-col gap-3"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-ink-900 font-semibold text-base">{l.name}</p>
+                <button
+                  aria-label="Edit line"
+                  className="shrink-0 h-9 w-9 grid place-items-center rounded-xl bg-primary-400 text-indigo-900"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              </div>
+              <dl className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                <dt className="text-indigo-600 font-bold">Qty</dt>
+                <dd className="text-ink-900 text-right">{l.qty}</dd>
+                <dt className="text-indigo-600 font-bold">Duration</dt>
+                <dd className="text-ink-900 text-right">{l.duration}</dd>
+                <dt className="text-indigo-600 font-bold">Price</dt>
+                <dd className="text-ink-900 text-right">{formatPrice(l.price)}</dd>
+                <dt className="text-indigo-600 font-bold">Total</dt>
+                <dd className="text-ink-900 text-right font-semibold">
+                  {formatPrice(l.qty * l.price)}
+                </dd>
+              </dl>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="mt-6 rounded-2xl bg-primary-50 p-6 md:p-8 flex items-center justify-end gap-6">
-        <p className="text-indigo-600 font-bold text-2xl">Grand Total</p>
+      <section className="mt-6 rounded-2xl bg-primary-50 p-6 md:p-8 flex items-center justify-between md:justify-end gap-4 md:gap-6">
+        <p className="text-indigo-600 font-bold text-xl md:text-2xl">Grand Total</p>
         <p className="text-indigo-600 font-bold text-2xl md:text-3xl">{formatPrice(total)}</p>
       </section>
 
